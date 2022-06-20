@@ -6,7 +6,7 @@
 # For accesing this software install libraries with
 
 ```bash
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 <br>
 With these commands you are installing all dependecies side by python gui model and for database model! :)<br>
