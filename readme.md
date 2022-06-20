@@ -1,7 +1,7 @@
 # A readme file for my project of devrialem which get a degree in teknofest2022!
---  [ ] Set gui for movement control!<br>
---  [X] Set gui for website!<br>
---  [X] Set gui for db model!<br>
+*  [ ] Set gui for movement control!<br>
+*  [X] Set gui for website!<br>
+*  [X] Set gui for db model!<br>
 <br>
 # For accesing this software install libraries with
 
