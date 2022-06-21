@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*-coding:utf-8-*-
 import cv2
 import numpy as np
 import pyzbar.pyzbar as pyzbar
@@ -12,6 +14,8 @@ def change_res(width, height):
     cap.set(3, width)
     cap.set(4, height)
 
+with open('is_scanner_open.txt', 'w') as f:
+    f.write('True')
 change_res(1920,1080)
 while True:
     _, frame = cap.read()
@@ -28,9 +32,12 @@ while True:
             with open('qrid.txt', 'w+') as f:
                 f.write(obj.data.decode("utf-8"))
 
-    if linecache.getline('qrid.txt', 1) == data:
-        time.sleep(2)
-        sys.exit(0)
+    if linecache.getline('qrid.txt', 1)[:-1] == data:
+        with open('is_scanner_open.txt', 'w') as f:
+            f.write('False')
+
+        cap.release()
+        cv2.destroyAllWindows()
 
             
     cv2.imshow("Devrialem GUI - Scanner", frame)

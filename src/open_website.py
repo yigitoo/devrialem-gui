@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*-coding:utf-8-*-
 import pyautogui as keyboard
 import os
 import time

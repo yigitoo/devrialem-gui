@@ -1,15 +1,15 @@
+#!/usr/bin/python
+# -*-coding:utf-8-*-
 # import tkinter.scrolledtext as scrolledtext
 import tkinter
 from tkinter import messagebox
-from functools import partial
 import pymongo as mongo
 import random as r
 
 def insert_user(name, surname, username, password):
     db_link = "mongodb+srv://nfl:nfl2021@cluster0.nzqee.mongodb.net/test&ssl=true"
-    expression = not (name == None or surname == None or password == None or username == None)
+    expression = not (name.get() == "" or surname.get() == "" or password.get() == "" or username.get() == "")
     if expression:
-
         new_user = {
             "name": name.get(),
             "surname": surname.get(),
@@ -37,12 +37,14 @@ def insert_user(name, surname, username, password):
                     userjson = db.insert_one(new_user)
                     if userjson != None:
                         messagebox.showinfo(title="Kayıt başarılı", message="Kayıt olma işlemin başarıyla sonuçlandı.")
-                        print(f"Yeni kullanıcı kaydı yapıldı: {name.get() + " " + surname.get()}")
+                        print(f"Yeni kullanıcı kaydı yapıldı: {name.get() + ' ' + surname.get()}")
                         break
                     else: 
                         messagebox.showerror(title="Bilinmeyen Hata", message="Kayıt oluşturulurken bilinmeyen bir hata meydana geldi.\nTahmin: İnternet bağlantın sağlıklı veya kullanılabilir olmayabilir.")
                 if checkusername != None:
-                    messagebox.showerror(title="Error", message="Bu kullanıcı adı alınmış ya da form tam doldurulmamış.") 
+                    messagebox.showerror(title="Hata", message="Bu kullanıcı adı alınmış ya da form tam doldurulmamış.")
+    else:
+        messagebox.showerror(title='Hata', message='Lütfen formun tamamını doldurun!')
                     
 
 
@@ -80,14 +82,13 @@ password_label = tkinter.Label(
 password = tkinter.StringVar()
 password_entry = tkinter.Entry(frame, textvariable=password, show="*", font=("Consolas", 25))
 
-insert_user = partial(insert_user, name, surname, username, password)
 signup_button = tkinter.Button(
-    frame, text="Kayıt ol!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25), command=insert_user)
+    frame, text="Kayıt ol!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25), command=lambda: insert_user(name, surname, username, password))
 quit_button = tkinter.Button(
     frame, text="Ana menüye dön!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25), command=on_closing)
 
 # Placing widgets on the screen
-signup_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
+signup_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=55)
 name_label.grid(row=1, column=0)
 name_entry.grid(row=1, column=1, pady=20)
 surname_label.grid(row=2, column=0)
