@@ -5,10 +5,12 @@ import os
 import time
 
 def redirect(site):
-	os.system(f'start chrome "{site}"')
-
+	if os.name == "nt":
+		os.system(f'start chrome "{site}"')
+	if os.name == "posix":
+		os.system(f'xdg-open {site}')
 site = {
-	"product": "http://mongodb-learning.vercel.app",
+	"product": "http://devrialem.vercel.app",
 	"dev": "localhost:3000"
 }
 
@@ -23,3 +25,5 @@ try:
 	keyboard.hotkey('alt', 'f4')
 except Exception as e:
 	print(e)
+except KeyboardInterrupt:
+	print("Exiting...")

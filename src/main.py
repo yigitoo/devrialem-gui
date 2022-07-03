@@ -5,7 +5,7 @@ from tkinter import messagebox
 import pymongo as mongo
 import os
 from tkinter import ttk
-
+import threading
 root = tkinter.Tk()
 
 def on_closing():
@@ -23,6 +23,9 @@ def login():
 def signup():
     os.system('python signup.py')
 
+tlogin = threading.Thread(target=login)
+tsignup = threading.Thread(target=signup)
+
 def version():
     messagebox.showinfo(title="Version", message=f"""Version 1.1
 Hazırlayan: Yiğit GÜMÜŞ
@@ -39,12 +42,12 @@ title_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=75)
 giris_button = tkinter.Button(
     frame, text="Giriş yap!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
 giris_button.grid(row=1,column=0, sticky="news", ipadx=75,ipady=75)
-giris_button.config(command=login)
+giris_button.config(command= lambda: tlogin.start())
 
 kayit_button = tkinter.Button(
     frame, text="Kayıt ol!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
 kayit_button.grid(row=1,column=1, sticky="news", ipadx=75,ipady=75)
-kayit_button.config(command=signup)
+kayit_button.config(command= lambda: tsignup.start())
 
 
 version_button= tkinter.Button(

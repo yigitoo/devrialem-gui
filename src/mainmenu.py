@@ -2,9 +2,12 @@
 # -*-coding:utf-8-*-
 import tkinter
 from tkinter import messagebox
+
+from numpy import sign
 import pymongo as mongo
 import os
 import linecache
+import threading
 
 name = linecache.getline('username.txt', 1)[:-1]
 user = linecache.getline('username.txt', 2)[:-1]
@@ -13,7 +16,7 @@ id_ = linecache.getline('username.txt', 3)[:-1]
 root = tkinter.Tk()
 def open_website(): 
     os.system('python open_website.py')
-
+topen_website = threading.Thread(target=open_website)
 def user_page():
     db_link = "mongodb+srv://nfl:nfl2021@cluster0.nzqee.mongodb.net/test&ssl=true"
     with mongo.MongoClient(db_link) as client:
@@ -37,8 +40,8 @@ Kredi: {user_json["credit"]}
 
 def scan_qr_gui():
     os.system('python scan_qr_gui.py')
-def signup():
-    os.system('python sign_up.py')
+tscan_qr_gui = threading.Thread(target=scan_qr_gui)
+
 def on_closing():
     if messagebox.askokcancel("Çıkış", "Çıkmak istediğine emin misin?"):
         root.destroy()
@@ -56,12 +59,12 @@ title_label.grid(row=0, column=0, columnspan=2, sticky="news", ipadx=150, pady=7
 qrcode_button = tkinter.Button(
     frame, text="Tarayıcı aç.", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
 qrcode_button.grid(row=1,column=0, sticky="news", ipadx=75,ipady=75)
-qrcode_button.config(command=scan_qr_gui)
+qrcode_button.config(command=lambda: tscan_qr_gui.start())
 
 site_button= tkinter.Button(
     frame, text="Uygulamayı aç!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
 site_button.grid(row=1,column=1, sticky="news", ipadx=100,ipady=75)
-site_button.config(command=open_website)
+site_button.config(command=lambda: topen_website.start())
 
 userpage_button = tkinter.Button(
     frame, text="Kullanıcı Bilgileri.", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))

@@ -4,15 +4,19 @@
 import tkinter
 from tkinter import messagebox
 from functools import partial
+import threading
 import pymongo as mongo
 import os
 
-def validateLogin(username, password, db_link):
+#from sqlalchemy import column
+
+
+def validateLogin(username, password):
     global usrname
     usrname = username.get()
     passwd = password.get()
 
-    with mongo.MongoClient(db_link) as client:
+    with mongo.MongoClient("mongodb+srv://nfl:nfl2021@cluster0.nzqee.mongodb.net/test&ssl=true") as client:
         table = client["hotel_reservation"]
         db = table.users
         json_obj = db.find_one({
@@ -30,9 +34,6 @@ def validateLogin(username, password, db_link):
             with open('username.txt', 'w', encoding='utf-8') as f:
                 f.write(f"{fullname}\n{json_obj['username']}\n{json_obj['_id']}")
             os.system("python mainmenu.py")
-
-db_link = "mongodb+srv://nfl:nfl2021@cluster0.nzqee.mongodb.net/test&ssl=true"
-
 root = tkinter.Tk()
 def on_closing():
     if messagebox.askokcancel("Çıkış", "Çıkmak istediğine emin misin?"):
@@ -41,7 +42,9 @@ def on_closing():
 root.title('Devrialem GUI')
 root.configure(bg='#333333')
 
-
+def login_with_qr_code():
+    os.system('python qr_generator.py')
+tlogin_with_qr_code = threading.Thread(target=login_with_qr_code)
 frame = tkinter.Frame(bg='#333333')
 
 # Creating widgets
@@ -58,22 +61,29 @@ password_label = tkinter.Label(
 password = tkinter.StringVar()
 password_entry = tkinter.Entry(frame, textvariable=password, show="*", font=("Consolas", 25))
 
-validateLogin = partial(validateLogin, username, password, db_link)
-login_button = tkinter.Button(
-    frame, text="Giriş!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25), command=validateLogin)
+xvalidateLogin = partial(validateLogin, username, password)
+tvalidateLogin = threading.Thread(target=xvalidateLogin)
 
+login_button = tkinter.Button(
+    frame, text="Giriş!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25), command=lambda: tvalidateLogin.start())
 quit_button = tkinter.Button(
     frame, text="Ana menüye dön!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25), command=on_closing)
 
+login_with_qr_button = tkinter.Button(
+    frame, text = 'Karekod ile giriş', bg='#FF3399', fg='#FFFFFF', font = ('Consolas', 25)
+)
+login_with_qr_button.configure(command=lambda: tlogin_with_qr_code.start())
 # Placing widgets on the screen
-login_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=50)
+login_label.grid(row=0, column=0, columnspan=3, sticky="news", pady=50)
 username_label.grid(row=1, column=0, pady=30)
 username_entry.grid(row=1, column=1, pady=50)
 password_label.grid(row=2, column=0, pady=30)
 password_entry.grid(row=2, column=1, pady=50)
-login_button.grid(row=3, column=0, columnspan=1, pady=50)
-quit_button.grid(row=3, column=1, columnspan=1, pady=50)
+login_button.grid(row=3, column=0, columnspan=1, pady=50, padx=10)
+quit_button.grid(row=3, column=2, columnspan=1, pady=50)
+login_with_qr_button.grid(row=3, column=1, columnspan=1, pady=50)
 frame.pack()
+
 menubar = tkinter.Menu(root)
 filemenu = tkinter.Menu(menubar, tearoff=0)
 filemenu.add_command(label="Exit", command=on_closing)
