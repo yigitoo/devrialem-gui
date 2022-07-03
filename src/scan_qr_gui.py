@@ -6,7 +6,6 @@ import pymongo as mongo
 import os
 from functools import partial
 import linecache
-from tkinter import NORMAL, DISABLED
 import subprocess
 import threading
 import time
@@ -66,41 +65,29 @@ title_label = tkinter.Label(
 title_label.grid(row=0, column=0, columnspan=2, sticky='news', ipady=75)
 
 ncredit_buttonminus = tkinter.Button(
-    frame, text="-", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25), state=DISABLED)
+    frame, text="-", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
 ncredit_buttonminus.grid(row=2, column=1, sticky="news", columnspan=1, pady=20, ipady=50)
-ncredit_buttonminus.config(command=manipulate_creditminus, state=DISABLED)
+ncredit_buttonminus.config(command=manipulate_creditminus)
 
 ncredit_buttonplus = tkinter.Button(
-    frame, text="+", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25), state=DISABLED)
+    frame, text="+", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
 ncredit_buttonplus.grid(row=2, column=0, sticky="news", columnspan=1, pady=20, ipady=50)
-ncredit_buttonplus.config(command=manipulate_creditplus, state=DISABLED)
+ncredit_buttonplus.config(command=manipulate_creditplus)
 
 
 back_button = tkinter.Button(
 	frame, text="Geri dön!", bg='#FF3399', fg='#FFFFFF', font = ("Consolas", 25))
-back_button.config(command=on_closing, state=NORMAL)
+back_button.config(command=on_closing)
 back_button.grid(row=1, column=1, sticky='news', ipadx=100, ipady=75)
 def open_scanner():
 	os.system('python scan_webcam.py')
 
 topen_scanner = threading.Thread(target=open_scanner)
-def scan_webcam():
-	topen_scanner.start()
-
-	while True:
-		is_scanner_open = linecache.getline('is_scanner_open.txt', 1)[::-1]
-
-		if bool(is_scanner_open) == False:
-			ncredit_buttonminus['state'] = NORMAL
-			ncredit_buttonplus['state'] = NORMAL
-			break
-
-open_webcam = threading.Thread(target=scan_webcam, daemon=True)
 
 opencam_button = tkinter.Button(
     frame, text="Kamerayı aç.", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
 opencam_button.grid(row=1,column=0, sticky="news", ipadx=100,ipady=75)
-opencam_button.config(command=lambda: open_webcam.start())
+opencam_button.config(command=lambda: topen_scanner.start())
 
 
 frame.pack()
