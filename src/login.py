@@ -7,9 +7,7 @@ from functools import partial
 import threading
 import pymongo as mongo
 import os
-
-#from sqlalchemy import column
-
+import platform
 
 def validateLogin(username, password):
     global usrname
@@ -43,7 +41,16 @@ root.title('Devrialem GUI')
 root.configure(bg='#333333')
 
 def login_with_qr_code():
-    os.system('python qr_generator.py')
+    operating_system = platform.system().lower()
+    if operating_system == "linux":
+        os.system('xdg-open https://devrialem.vercel.app/auth/qrlogin/')
+    if operating_system == "windows":
+        try:
+            os.system('start chrome https://devrialem.vercel.app/auth/qrlogin/')
+        except:
+            os.system('explorer "https://google.com"')
+    if operating_system == "darwin": #which mean macOS
+        os.system('open https://devrialem.vercel.app/auth/qrlogin/')
 tlogin_with_qr_code = threading.Thread(target=login_with_qr_code)
 frame = tkinter.Frame(bg='#333333')
 

@@ -14,6 +14,9 @@ import numpy as np
 import pyzbar.pyzbar as pyzbar
 import sys
 
+# i cut the last char because the file has \0 in last of lines 
+# if you are coded in c you'll know the malloc things
+# for example: malloc(4) byte [0] => a [1] => b [2] => c [3] => "\0"
 name = linecache.getline('username.txt', 1)[:-1]
 user = linecache.getline('username.txt', 2)[:-1]
 id_ = linecache.getline('username.txt', 3)[:-1]

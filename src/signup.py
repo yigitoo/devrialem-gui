@@ -5,6 +5,7 @@ import tkinter
 from tkinter import messagebox
 import pymongo as mongo
 import random as r
+from uuid import uuid4 as generate_token
 
 def insert_user(name, surname, username, password):
     db_link = "mongodb+srv://nfl:nfl2021@cluster0.nzqee.mongodb.net/test&ssl=true"
@@ -17,7 +18,8 @@ def insert_user(name, surname, username, password):
             "password": password.get(),
             "reservations": {},
             "credit": 0,
-            "isAdmin": False
+            "isAdmin": False,
+            "code": str(generate_token())
             # add "_id" paramater later with random library and check with dbmodel!:)
         }
 
