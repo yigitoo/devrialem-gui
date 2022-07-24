@@ -69,10 +69,10 @@ password = tkinter.StringVar()
 password_entry = tkinter.Entry(frame, textvariable=password, show="*", font=("Consolas", 25))
 
 xvalidateLogin = partial(validateLogin, username, password)
-tvalidateLogin = threading.Thread(target=xvalidateLogin)
+# tvalidateLogin = threading.Thread(target=xvalidateLogin)
 
 login_button = tkinter.Button(
-    frame, text="Giriş!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25), command=lambda: tvalidateLogin.start())
+    frame, text="Giriş!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25), command=xvalidateLogin)
 quit_button = tkinter.Button(
     frame, text="Ana menüye dön!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25), command=on_closing)
 

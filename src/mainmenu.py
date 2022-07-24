@@ -40,7 +40,7 @@ Kredi: {user_json["credit"]}
 
 def scan_qr_gui():
     os.system('python scan_qr_gui.py')
-tscan_qr_gui = threading.Thread(target=scan_qr_gui)
+# tscan_qr_gui = threading.Thread(target=scan_qr_gui)
 
 def on_closing():
     if messagebox.askokcancel("Çıkış", "Çıkmak istediğine emin misin?"):
@@ -59,7 +59,7 @@ title_label.grid(row=0, column=0, columnspan=2, sticky="news", ipadx=150, pady=7
 qrcode_button = tkinter.Button(
     frame, text="Tarayıcı aç.", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
 qrcode_button.grid(row=1,column=0, sticky="news", ipadx=75,ipady=75)
-qrcode_button.config(command=lambda: tscan_qr_gui.start())
+qrcode_button.config(command=scan_qr_gui) #lambda: tscan_qr_gui.start()
 
 site_button= tkinter.Button(
     frame, text="Uygulamayı aç!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))

@@ -90,7 +90,7 @@ topen_scanner = threading.Thread(target=open_scanner)
 opencam_button = tkinter.Button(
     frame, text="Kamerayı aç.", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
 opencam_button.grid(row=1,column=0, sticky="news", ipadx=100,ipady=75)
-opencam_button.config(command=lambda: topen_scanner.start())
+opencam_button.config(command=lambda: topen_scanner.start()) #open_scanner
 
 
 frame.pack()
