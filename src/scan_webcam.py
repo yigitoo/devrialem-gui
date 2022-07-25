@@ -14,8 +14,6 @@ def change_res(width, height):
     cap.set(3, width)
     cap.set(4, height)
 
-with open('is_scanner_open.txt', 'w') as f:
-    f.write('True')
 change_res(1920,1080)
 while True:
     _, frame = cap.read()
@@ -27,18 +25,10 @@ while True:
         cv2.putText(frame, obj.data.decode("utf-8"), (50, 50), font, 2,
                     (255, 255, 255), 3)
         if (obj.data.decode("utf-8")[0:6].lower() == "havlu#") or (obj.data.decode("utf-8")[0:3].lower() == "su#"):
-            cv2.putText(frame, f"Tarandi {obj.type}", (50, 100), font, 2, 
-                (0,255,0), 3)
             with open('qrid.txt', 'w+') as f:
                 f.write(obj.data.decode("utf-8"))
-
-    if linecache.getline('qrid.txt', 1)[:-1] == data:
-        with open('is_scanner_open.txt', 'w') as f:
-            f.write('False')
-
-        cap.release()
-        cv2.destroyAllWindows()
-
+                cap.release()
+                cv2.destroyAllWindows()
             
     cv2.imshow("Devrialem GUI - Scanner", frame)
 

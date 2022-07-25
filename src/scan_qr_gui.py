@@ -69,19 +69,26 @@ title_label.grid(row=0, column=0, columnspan=2, sticky='news', ipady=75)
 
 ncredit_buttonminus = tkinter.Button(
     frame, text="-", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
-ncredit_buttonminus.grid(row=2, column=1, sticky="news", columnspan=1, pady=20, ipady=50)
+ncredit_buttonminus.grid(row=2, column=1, sticky="news", columnspan=1, pady=20, ipady=40)
 ncredit_buttonminus.config(command=manipulate_creditminus)
 
 ncredit_buttonplus = tkinter.Button(
     frame, text="+", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
-ncredit_buttonplus.grid(row=2, column=0, sticky="news", columnspan=1, pady=20, ipady=50)
+ncredit_buttonplus.grid(row=2, column=0, sticky="news", columnspan=1, pady=20, ipady=40)
 ncredit_buttonplus.config(command=manipulate_creditplus)
 
+def textloop():
+	with open("qrid.txt", "r") as t:
+		scanner_data.config(text=f'Taranan veri: {t.read()}')
+	root.after(500, textloop)
+scanner_data = tkinter.Button(
+    frame, text="Veri taranmadı.", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
+scanner_data.grid(row=3, column=0, sticky="news", columnspan=2, pady=20)
 
 back_button = tkinter.Button(
 	frame, text="Geri dön!", bg='#FF3399', fg='#FFFFFF', font = ("Consolas", 25))
 back_button.config(command=on_closing)
-back_button.grid(row=1, column=1, sticky='news', ipadx=100, ipady=75)
+back_button.grid(row=1, column=1, sticky='news', ipadx=100, ipady=50)
 def open_scanner():
 	os.system('python scan_webcam.py')
 
@@ -89,7 +96,7 @@ topen_scanner = threading.Thread(target=open_scanner)
 
 opencam_button = tkinter.Button(
     frame, text="Kamerayı aç.", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
-opencam_button.grid(row=1,column=0, sticky="news", ipadx=100,ipady=75)
+opencam_button.grid(row=1,column=0, sticky="news", ipadx=100,ipady=50)
 opencam_button.config(command=lambda: topen_scanner.start()) #open_scanner
 
 
@@ -102,4 +109,5 @@ root.config(menu=menubar)
 
 root.attributes('-fullscreen', True)
 root.protocol('WM_DELETE_WINDOW', on_closing)
+textloop()
 root.mainloop()
