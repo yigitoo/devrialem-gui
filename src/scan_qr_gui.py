@@ -79,7 +79,7 @@ ncredit_buttonplus.config(command=manipulate_creditplus)
 
 def textloop():
 	with open("qrid.txt", "r") as t:
-		scanner_data.config(text=f'Taranan veri: {t.read()}')
+		scanner_data.config(text=f'Son Taranan veri: {t.read()}')
 	root.after(500, textloop)
 scanner_data = tkinter.Button(
     frame, text="Veri taranmadı.", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))

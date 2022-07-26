@@ -1,0 +1,17 @@
+Öykü Durağı'na hoş geldiniz 
+Bu program araclılığı ile hikaye okuyabilirsiniz hangi
+türde hikaye seçmek istediğinizi yanlardaki tuşlar 
+aracılığı ile seçebilirsiniz
+
+*Ortada bulunan tuşlar yardımı ile raslantısal bir
+şekilde istediğiniz türde metni alabilirsiniz
+
+*Alt taraftaki Kendim seçmek istiyorum butonunu 
+tıklayarak başlıklara göre kendi hikayenizi seçebilir-
+siniz
+
+*Şehrim Bölgem Kültürüm butonunu tıklayarak bulunduğunuz
+şehirde/bölgede bulunan yöresel lezzetler doğal güzelllik-
+ler ve tarihi bölgeler hakkında bilgi alabilir bu yerlere
+ulaşmak için en kısa yolu metin altındaki karekodu okutarak 
+ulaşabilirsiniz
