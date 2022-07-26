@@ -43,6 +43,9 @@ def scan_qr_gui():
 # tscan_qr_gui = threading.Thread(target=scan_qr_gui)
 
 def on_closing():
+    with open('qrid.txt', 'w') as f:
+        f.write("")
+        #delete qrid values for another login profile
     if messagebox.askokcancel("Çıkış", "Çıkmak istediğine emin misin?"):
         root.destroy()
 root.bind('<Escape>', root.destroy)
