@@ -19,7 +19,8 @@ def insert_user(name, surname, username, password):
             "reservations": {},
             "credit": 0,
             "isAdmin": False,
-            "code": str(generate_token())
+            "code": str(generate_token()),
+            "donates": 0
             # add "_id" paramater later with random library and check with dbmodel!:)
         }
 
