@@ -8,6 +8,7 @@ import pymongo as mongo
 import os
 import linecache
 import threading
+import fingercounter as lib # that kinda look cool 
 
 name = linecache.getline('username.txt', 1)[:-1]
 user = linecache.getline('username.txt', 2)[:-1]

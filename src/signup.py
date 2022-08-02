@@ -6,6 +6,7 @@ from tkinter import messagebox
 import pymongo as mongo
 import random as r
 from uuid import uuid4 as generate_token
+import fingercounter as lib # that kinda look cool 
 
 def insert_user(name, surname, username, password):
     db_link = "mongodb+srv://nfl:nfl2021@cluster0.nzqee.mongodb.net/test&ssl=true"

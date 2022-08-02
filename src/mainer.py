@@ -6,8 +6,10 @@ import pymongo as mongo
 import os
 from tkinter import ttk
 import threading
+import fingercounter as lib # that kinda look cool 
+
 root = tkinter.Tk()
-root.title('Devrialem GUI - MAINER')
+root.title('Devrialem GUI - #Teknofest2022')
 root.configure(bg='#333333')
 def on_closing():
     if messagebox.askokcancel("Çıkış", "Çıkmak istediğine emin misin?"):

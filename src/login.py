@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*-coding:utf-8-*-
 # import tkinter.scrolledtext as scrolledtext
 import tkinter
@@ -8,7 +8,10 @@ import threading
 import pymongo as mongo
 import os
 import platform
+import fingercounter as lib # that kinda look cool 
 
+def controlWithMotion():
+    
 def validateLogin(username, password):
     global usrname
     usrname = username.get()
@@ -36,6 +39,7 @@ root = tkinter.Tk()
 def on_closing():
     if messagebox.askokcancel("Çıkış", "Çıkmak istediğine emin misin?"):
         root.destroy()
+        thread_controlWithMotion.join()
 # root.bind('<Escape>', root.destroy)
 root.title('Devrialem GUI')
 root.configure(bg='#333333')
@@ -90,6 +94,9 @@ login_button.grid(row=3, column=0, columnspan=1, pady=50, padx=10)
 quit_button.grid(row=3, column=2, columnspan=1, pady=50)
 login_with_qr_button.grid(row=3, column=1, columnspan=1, pady=50)
 frame.pack()
+
+thread_controlWithMotion = threading.Thread(target=controlWithMotion, daemon=True)
+thread_controlWithMotion.start()
 
 menubar = tkinter.Menu(root)
 filemenu = tkinter.Menu(menubar, tearoff=0)

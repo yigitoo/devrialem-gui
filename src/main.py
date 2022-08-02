@@ -6,6 +6,8 @@ import pymongo as mongo
 import os
 from tkinter import ttk
 import threading
+import fingercounter as lib # that kinda look cool 
+
 root = tkinter.Tk()
 
 def on_closing():
