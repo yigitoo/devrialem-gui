@@ -4,7 +4,7 @@ import mediapipe as mp
 class fingerCounter():
     def __init__(self):
         self.updateCounting()
-
+        #neden sadece buraya o kodu yazmadığımı bilmiyorum :D
     def updateCounting(self):
         cap = cv2.VideoCapture(0)
         mp_Hands = mp.solutions.hands
