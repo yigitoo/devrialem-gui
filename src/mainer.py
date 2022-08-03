@@ -11,6 +11,7 @@ import fingercounter as lib # that kinda look cool
 root = tkinter.Tk()
 root.title('Devrialem GUI - #Teknofest2022')
 root.configure(bg='#333333')
+
 def on_closing():
     if messagebox.askokcancel("Çıkış", "Çıkmak istediğine emin misin?"):
         root.destroy()

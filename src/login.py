@@ -11,11 +11,12 @@ import platform
 import fingercounter as lib # that kinda look cool 
 
 def controlWithMotion():
+    global current_upCount
     while True:
         fingers = lib.fingerCounter()
-        print(fingers.upCount)
-
-
+        with open('fingercount', 'r') as f:
+            upFingers = f.readline()
+            print(upFingers)
 def validateLogin(username, password):
     global usrname
     usrname = username.get()
@@ -44,6 +45,7 @@ def on_closing():
     if messagebox.askokcancel("Çıkış", "Çıkmak istediğine emin misin?"):
         root.destroy()
         thread_controlWithMotion.join()
+        exit()  
 # root.bind('<Escape>', root.destroy)
 root.title('Devrialem GUI')
 root.configure(bg='#333333')
