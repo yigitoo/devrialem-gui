@@ -11,7 +11,11 @@ import platform
 import fingercounter as lib # that kinda look cool 
 
 def controlWithMotion():
-    
+    while True:
+        fingers = lib.fingerCounter()
+        print(fingers.upCount)
+
+
 def validateLogin(username, password):
     global usrname
     usrname = username.get()
@@ -103,6 +107,7 @@ filemenu = tkinter.Menu(menubar, tearoff=0)
 filemenu.add_command(label="Exit", command=on_closing)
 menubar.add_cascade(label="File", menu=filemenu)
 root.config(menu=menubar)
+
 
 root.attributes("-fullscreen", True)
 root.protocol("WM_DELETE_WINDOW", on_closing)
