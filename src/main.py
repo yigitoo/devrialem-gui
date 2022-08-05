@@ -15,8 +15,6 @@ root = tkinter.Tk()
 finger_file = 'fingercount.txt'
 with open(finger_file, 'w') as f:
     f.write('')
-    
-
 
 fc = fingerCounter()
 getfingers = partial(fc.getfingers)
@@ -42,9 +40,11 @@ def controlWithMotion():
                 if current_upCount == "2":
                     delete_fingerfile()
                     signup()
+                    delete_fingerfile()
                 if current_upCount == "3":
                     delete_fingerfile()
                     version()
+                    delete_fingerfile()
     except RuntimeError:
         print('İsteğiniz alındı.')
 

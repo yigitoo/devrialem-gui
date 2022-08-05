@@ -6,12 +6,12 @@ import time
 
 def redirect(site):
 	if os.name == "nt":
-		os.system(f'start chrome "{site}"')
+		os.system(f'explorer "{site}"')
 	if os.name == "posix":
 		os.system(f'xdg-open {site}')
 site = {
-	"product": "http://devrialem.vercel.app",
-	"dev": "localhost:3000"
+	"product": "https://devrialem.vercel.app/",
+	"dev": "http://localhost:3000/"
 }
 
 choice = "product"

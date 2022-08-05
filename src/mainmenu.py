@@ -2,20 +2,77 @@
 # -*-coding:utf-8-*-
 import tkinter
 from tkinter import messagebox
-
+from functools import partial
 from numpy import sign
 import pymongo as mongo
 import os
 import linecache
 import threading
 from fingercounter import fingerCounter
+import time
 
-fc = fingerCounter()
 name = linecache.getline('username.txt', 1)[:-1]
 user = linecache.getline('username.txt', 2)[:-1]
 id_ = linecache.getline('username.txt', 3)[:-1]
 
 root = tkinter.Tk()
+
+finger_file = 'fingercount.txt'
+with open(finger_file, 'w') as f:
+    f.write('')
+
+fc = fingerCounter()
+getfingers = partial(fc.getfingers)
+thread_getfingers = threading.Thread(target=getfingers, daemon=True) 
+
+def delete_fingerfile():
+    with open(finger_file, 'w') as f:
+        f.write('')
+
+def controlWithMotion():
+    try:
+        global current_upCount
+        thread_getfingers.start()
+        while True:
+            with open(finger_file, 'r') as f:
+                current_upCount = f.read()
+
+                if current_upCount == "1":
+                    delete_fingerfile()
+                    user_page()
+
+                if current_upCount == "3":
+                    fc.close = 1
+                    delete_fingerfile()
+                    time.sleep(1)
+                    open_website()
+                    time.sleep(150)
+                    fc.close = 0
+                    time.sleep(1)
+                    fc.checkClose()
+                    # kill program and restart program for reactivate controlWithFingersCount :D (not motion)
+                    if os.name == "nt":
+                        os.system(".\\scripts\\win\\mainmenu.bat")
+                    if os.name == "posix":
+                        os.system("sh ./scripts/linux/mainmenu.sh")
+                if current_upCount == "5":
+                    fc.close = 1
+                    delete_fingerfile()
+                    time.sleep(2)
+                    if os.name == "nt":
+                        os.system('.\\scripts\\win\\scan_qr_gui.bat')
+                    if os.name == "posix":
+                        os.system('chmod +x ./scripts/linux/scan_qr_gui.sh && sh ./linux/scan_qr_gui.sh')
+                    '''
+                    # i dont wanna use for macos because i have not money for that :D
+                    # and who is want to use this system on macOS :D whatever i dont add for
+                    # darwin :D
+                    '''
+                    raise SystemExit # or sys.exit() / exit() / sys.stderr.("SystemExit: bla bla :D")
+    except RuntimeError:
+        print('İsteğiniz alındı.')
+
+
 def open_website(): 
     os.system('python open_website.py')
 topen_website = threading.Thread(target=open_website)
@@ -50,8 +107,10 @@ def on_closing():
     with open('username.txt', 'w') as f:
         f.write('')
         #delete qrid values for another login profile
+
     if messagebox.askokcancel("Çıkış", "Çıkmak istediğine emin misin?"):
         root.destroy()
+        delete_fingerfile()
 root.bind('<Escape>', root.destroy)
 root.title('Devrialem GUI')
 root.configure(bg='#333333')
@@ -89,6 +148,10 @@ filemenu = tkinter.Menu(menubar, tearoff=0)
 filemenu.add_command(label="Exit", command=on_closing)
 menubar.add_cascade(label="File", menu=filemenu)
 root.config(menu=menubar)
+
+
+thread_controlWithMotion = threading.Thread(target=controlWithMotion, daemon=True)
+thread_controlWithMotion.start()
 
 root.attributes("-fullscreen", True)
 root.protocol("WM_DELETE_WINDOW", on_closing)

@@ -6,6 +6,12 @@ class fingerCounter(object):
     def __init__(self, close = 0):
         self.close = close
 
+    def checkClose():
+        if self.close == 0:
+            self.getfingers()
+        else:
+            print('Program paused/finished.')
+
     def getfingers(self):
         try:
             cap = cv2.VideoCapture(0)
