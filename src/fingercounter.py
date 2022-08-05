@@ -1,8 +1,12 @@
 import cv2
 import mediapipe as mp
 
-class fingerCounter():
-    def __init__(self):
+
+class fingerCounter(object):
+    def __init__(self, close = 0):
+        self.close = close
+
+    def getfingers(self):
         try:
             cap = cv2.VideoCapture(0)
             mp_Hands = mp.solutions.hands
@@ -27,8 +31,6 @@ class fingerCounter():
                             h, w, c = image.shape
                             cx, cy = int(lm.x * w), int(lm.y * h)
                             handList.append((cx, cy))
-                    for point in handList:
-                        cv2.circle(image, point, 10, (255, 255, 0), cv2.FILLED)
 
                     upCount = 0
                     for coordinate in finger_Coord:
@@ -37,12 +39,13 @@ class fingerCounter():
                     if handList[thumb_Coord[0]][0] > handList[thumb_Coord[1]][0]:
                         upCount += 1
 
-                    self.upCount = str(upCount)
-                    self.updateFingers(self.upCount)
+                    upCount = str(upCount)
+                    with open('fingercount.txt', 'w+') as f:
+                        f.write('{}'.format(upCount))
+                    
+                    if self.close == 1:
+                        break
             cap.release()
             cv2.destroyAllWindows()
         except KeyboardInterrupt:
-            exit()
-    def updateFingers(self, upCount = "0"):
-        with open('fingercount.txt', 'w+') as f:
-            f.write(f"{upCount}")
+            exit("Process canceled")

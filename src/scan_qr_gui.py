@@ -13,7 +13,6 @@ import cv2
 import numpy as np
 import pyzbar.pyzbar as pyzbar
 import sys
-import fingercounter as lib # that kinda look cool 
 
 # i cut the last char because the file has \0 in last of lines 
 # if you are coded in c you'll know the malloc things

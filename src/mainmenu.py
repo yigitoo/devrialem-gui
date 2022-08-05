@@ -8,8 +8,9 @@ import pymongo as mongo
 import os
 import linecache
 import threading
-import fingercounter as lib # that kinda look cool 
+from fingercounter import fingerCounter
 
+fc = fingerCounter()
 name = linecache.getline('username.txt', 1)[:-1]
 user = linecache.getline('username.txt', 2)[:-1]
 id_ = linecache.getline('username.txt', 3)[:-1]
@@ -46,6 +47,8 @@ def scan_qr_gui():
 def on_closing():
     with open('qrid.txt', 'w') as f:
         f.write("")
+    with open('username.txt', 'w') as f:
+        f.write('')
         #delete qrid values for another login profile
     if messagebox.askokcancel("Çıkış", "Çıkmak istediğine emin misin?"):
         root.destroy()

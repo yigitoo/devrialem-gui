@@ -1,18 +1,58 @@
 #!/usr/bin/python
 # -*-coding:utf-8-*-
+# coding: utf-8
 import tkinter
 from tkinter import messagebox
 import pymongo as mongo
 import os
 from tkinter import ttk
 import threading
-import fingercounter as lib # that kinda look cool 
-
+from fingercounter import fingerCounter
+from functools import partial
+import time
 root = tkinter.Tk()
+
+finger_file = 'fingercount.txt'
+with open(finger_file, 'w') as f:
+    f.write('')
+    
+
+
+fc = fingerCounter()
+getfingers = partial(fc.getfingers)
+thread_getfingers = threading.Thread(target=getfingers, daemon=True) 
+ 
+def delete_fingerfile():
+    with open(finger_file, 'w') as f:
+        f.write('')
+
+def controlWithMotion():
+    try:
+        global current_upCount
+        thread_getfingers.start()
+        while True:
+            with open(finger_file, 'r') as f:
+                current_upCount = f.read()
+
+                if current_upCount == "5":
+                    fc.close = 1
+                    delete_fingerfile()
+                    time.sleep(2)
+                    login()
+                if current_upCount == "2":
+                    delete_fingerfile()
+                    signup()
+                if current_upCount == "3":
+                    delete_fingerfile()
+                    version()
+    except RuntimeError:
+        print('İsteğiniz alındı.')
+
 
 def on_closing():
     if messagebox.askokcancel("Çıkış", "Çıkmak istediğine emin misin?"):
         root.destroy()
+        delete_fingerfile()
 # root.bind('<Escape>', root.destroy)
 root.title('Devrialem GUI')
 root.configure(bg='#333333')
@@ -20,7 +60,16 @@ root.configure(bg='#333333')
 frame = tkinter.Frame(bg='#333333')
 
 def login():
-    os.system('python login.py')
+    if os.name == "nt":
+        os.system('.\\scripts\\win\\login.bat')
+    if os.name == "posix":
+        os.system('chmod +x ./scripts/linux/login.sh && sh ./linux/login.sh')
+    '''
+    # i dont wanna use for macos because i have not money for that :D
+    # and who is want to use this system on macOS :D whatever i dont add for
+    # darwin :D
+    '''
+    raise SystemExit
 
 def signup():
     os.system('python signup.py')
@@ -69,6 +118,9 @@ filemenu = tkinter.Menu(menubar, tearoff=0)
 filemenu.add_command(label="Exit", command=on_closing)
 menubar.add_cascade(label="File", menu=filemenu)
 root.config(menu=menubar)
+
+thread_controlWithMotion = threading.Thread(target=controlWithMotion, daemon=True)
+thread_controlWithMotion.start()
 
 root.attributes("-fullscreen", True)
 root.protocol("WM_DELETE_WINDOW", on_closing)
