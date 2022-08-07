@@ -1,1 +1,3 @@
-python3 mainer.py || python mainer.py
+#!/bin/sh
+
+python3 devrialem.py || python devrialem.py

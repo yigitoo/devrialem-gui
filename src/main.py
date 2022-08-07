@@ -63,7 +63,7 @@ def login():
     if os.name == "nt":
         os.system('.\\scripts\\win\\login.bat')
     if os.name == "posix":
-        os.system('chmod +x ./scripts/linux/login.sh && sh ./linux/login.sh')
+        os.system('chmod +x ./scripts/linux/login.sh && sh ./scripts/linux/login.sh')
     '''
     # i dont wanna use for macos because i have not money for that :D
     # and who is want to use this system on macOS :D whatever i dont add for
