@@ -11,10 +11,16 @@ import threading
 from fingercounter import fingerCounter
 import time
 from sounds.lib import play_voice # made by me :D
+from sounds.lib import custom_voice_for_names # made by mee to :D
+from sounds.lib import play_voice_from_path
 
 name = linecache.getline('username.txt', 1)[:-1]
 user = linecache.getline('username.txt', 2)[:-1]
 id_ = linecache.getline('username.txt', 3)[:-1]
+
+custom_voice_for_names(name)
+
+play_voice_from_path('./preparing_sounds/temp.mp3')
 
 root = tkinter.Tk()
 
@@ -63,13 +69,13 @@ def controlWithMotion():
                     if os.name == "nt":
                         os.system('.\\scripts\\win\\scan_qr_gui.bat')
                     if os.name == "posix":
-                        os.system('chmod +x ./scripts/linux/scan_qr_gui.sh && sh ./linux/scan_qr_gui.sh')
+                        os.system('sh ./linux/scan_qr_gui.sh')
                     '''
                     # i dont wanna use for macos because i have not money for that :D
                     # and who is want to use this system on macOS :D whatever i dont add for
                     # darwin :D
                     '''
-                    raise SystemExit # or sys.exit() / exit() / sys.stderr.("SystemExit: bla bla :D")
+                    sys.exit() # or raise SystemExit / exit() / sys.stderr(or stdout).write("SystemExit: bla bla :D") ; exit(0)
     except RuntimeError:
         print('İsteğiniz alındı.')
 
@@ -112,6 +118,11 @@ def on_closing():
     if messagebox.askokcancel("Çıkış", "Çıkmak istediğine emin misin?"):
         root.destroy()
         delete_fingerfile()
+        if os.name == "nt":
+            os.system(f'del .\\preparing_sounds\\temp.mp3')
+        if os.name == "posix":
+            os.system(f'rm ./preparing_sounds/temp.mp3')
+        exit()
 root.bind('<Escape>', root.destroy)
 root.title('Devrialem GUI')
 root.configure(bg='#333333')
