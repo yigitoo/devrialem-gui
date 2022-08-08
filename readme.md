@@ -1,7 +1,11 @@
 # A readme file for my project of devrialem which one qualify to participate #Teknofest2022!
-*  [ ] Set gui for movement control!<br>
+*  [X] Set gui for movement control!<br>
 *  [X] Set gui for website!<br>
 *  [X] Set gui for db model!<br>
+<br>
+# Pre requirements:
+*  For linux: mpg123 (with normal user not root) & python3 (at least 3.9 suggested)<br>
+*  For windows: vlc & python3 (at least 3.9 suggested)<br>
 <br>
 # For accesing this software install libraries with
 

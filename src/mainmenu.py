@@ -10,6 +10,7 @@ import linecache
 import threading
 from fingercounter import fingerCounter
 import time
+from sounds.lib import play_voice # made by me :D
 
 name = linecache.getline('username.txt', 1)[:-1]
 user = linecache.getline('username.txt', 2)[:-1]

@@ -1,4 +1,10 @@
-In Windows: you can run just devrialem.exe file
-In Linux: you can run just binary file of this project!
+n Windows: just run  devrialem.exe file in "src" folder
+In Linux: you must run linux_setup_executable_form.sh but before run this file you should do this instructions:
+$ sudo chmod +x linux_setup_executable_form.sh 
+and then:
+$ ./linux_setup_executable_form.sh
+after that you can run the devrialem LSB executable with this commands:
+$ cd src
+$ ./devrialem
 
-P.S: You are need Python 3.9 version or higher for run. (I am not sure for version it'll be lower but i start development at 3.9.5 and finished with 3.10.5)
+P.S: You are need Python 3.9 version or higher for run. (I am not sure for version it'll be lower but i start development at 3.9.5 and finished with 3.10.5) :D!

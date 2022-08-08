@@ -10,8 +10,10 @@ import threading
 from fingercounter import fingerCounter
 from functools import partial
 import time
-root = tkinter.Tk()
+from sounds.lib import play_voice # made by me :D
 
+
+root = tkinter.Tk()
 finger_file = 'fingercount.txt'
 with open(finger_file, 'w') as f:
     f.write('')
@@ -36,9 +38,15 @@ def controlWithMotion():
                     fc.close = 1
                     delete_fingerfile()
                     time.sleep(2)
+
+                    play_voice('giris')
+                    
                     login()
                 if current_upCount == "2":
                     delete_fingerfile()
+                    
+                    play_voice('kayit')
+
                     signup()
                     delete_fingerfile()
                 if current_upCount == "3":

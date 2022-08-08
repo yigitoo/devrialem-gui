@@ -6,6 +6,11 @@ import pymongo as mongo
 import os
 from tkinter import ttk
 import threading
+import time
+from sounds.lib import play_voice # made by me :D
+
+# Devrialem sistemine hoş geldiniz!:)
+play_voice('merhaba')
 
 root = tkinter.Tk()
 root.title('Devrialem GUI - #Teknofest2022')

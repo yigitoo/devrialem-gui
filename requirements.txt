@@ -34,3 +34,4 @@ pytweening==1.0.4
 pywin32-ctypes==0.2.0
 pyzbar==0.1.9
 six==1.16.0
+gTTS==2.2.4
