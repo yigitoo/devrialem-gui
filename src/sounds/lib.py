@@ -5,7 +5,7 @@ from functools import partial
 
 def voice_exec(filename):
     if os.name == "nt":
-        os.system(f'vlc .\\preparing_sounds/{filename}.mp3')
+        os.system(f'vlc .\\preparing_sounds\\{filename}.mp3')
     if os.name == "posix":
         os.system(f'mpg123 ./preparing_sounds/{filename}.mp3')
 
