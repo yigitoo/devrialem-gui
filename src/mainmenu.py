@@ -116,6 +116,7 @@ def on_closing():
         #delete qrid values for another login profile
 
     if messagebox.askokcancel("Çıkış", "Çıkmak istediğine emin misin?"):
+        play_voice('cikis')
         root.destroy()
         delete_fingerfile()
         if os.name == "nt":
@@ -132,26 +133,26 @@ frame = tkinter.Frame(bg='#333333')
 # Creating widgets
 title_label = tkinter.Label(
     frame, text=f"Hoşgeldin, {name}!", bg='#333333', fg="#FF3399", font=("Consolas", 45))
-title_label.grid(row=0, column=0, columnspan=2, sticky="news", ipadx=150, pady=75)
+title_label.grid(row=0, column=0, columnspan=2, sticky="news", ipadx=150, pady=50)
 
 qrcode_button = tkinter.Button(
     frame, text="Tarayıcı aç.", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
-qrcode_button.grid(row=1,column=0, sticky="news", ipadx=75,ipady=75)
+qrcode_button.grid(row=1,column=0, sticky="news", ipadx=75,ipady=50)
 qrcode_button.config(command=scan_qr_gui) #lambda: tscan_qr_gui.start()
 
 site_button= tkinter.Button(
     frame, text="Uygulamayı aç!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
-site_button.grid(row=1,column=1, sticky="news", ipadx=100,ipady=75)
+site_button.grid(row=1,column=1, sticky="news", ipadx=100,ipady=50)
 site_button.config(command=lambda: topen_website.start())
 
 userpage_button = tkinter.Button(
     frame, text="Kullanıcı Bilgileri.", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
-userpage_button.grid(row=2,column=0, sticky="news", ipadx=75,ipady=75)
+userpage_button.grid(row=2,column=0, sticky="news", ipadx=75,ipady=50)
 userpage_button.config(command=user_page)
 
 quit_button = tkinter.Button(
     frame, text="Geri dön!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
-quit_button.grid(row=2,column=1, sticky="news",ipadx=100,ipady=75)
+quit_button.grid(row=2,column=1, sticky="news",ipadx=100,ipady=50)
 quit_button.config(command=on_closing)
 frame.pack()
 

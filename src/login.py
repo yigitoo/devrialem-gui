@@ -57,7 +57,7 @@ class Login(object):
         cap.set(4, height)
 
     def camloop(self):
-        self.change_res(1920,1080)
+        self.change_res(1150,768)
         while True:
             _, frame = cap.read()
             global data

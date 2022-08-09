@@ -65,16 +65,16 @@ frame = tkinter.Frame(bg='#333333')
 
 title_label = tkinter.Label(
 	frame, text = f"Tarayıcı sayfasına hoşgeldin {user}.", bg='#333333', fg='#FF3399', font=('Consolas', 30))
-title_label.grid(row=0, column=0, columnspan=2, sticky='news', ipady=75)
+title_label.grid(row=0, column=0, columnspan=2, sticky='news', ipady=50)
 
 ncredit_buttonminus = tkinter.Button(
     frame, text="-", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
-ncredit_buttonminus.grid(row=2, column=1, sticky="news", columnspan=1, pady=20, ipady=40)
+ncredit_buttonminus.grid(row=2, column=1, sticky="news", columnspan=1, pady=20, ipady=25)
 ncredit_buttonminus.config(command=manipulate_creditminus)
 
 ncredit_buttonplus = tkinter.Button(
     frame, text="+", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
-ncredit_buttonplus.grid(row=2, column=0, sticky="news", columnspan=1, pady=20, ipady=40)
+ncredit_buttonplus.grid(row=2, column=0, sticky="news", columnspan=1, pady=20, ipady=25)
 ncredit_buttonplus.config(command=manipulate_creditplus)
 
 def textloop():
@@ -88,7 +88,7 @@ scanner_data.grid(row=3, column=0, sticky="news", columnspan=2, pady=20)
 back_button = tkinter.Button(
 	frame, text="Geri dön!", bg='#FF3399', fg='#FFFFFF', font = ("Consolas", 25))
 back_button.config(command=on_closing)
-back_button.grid(row=1, column=1, sticky='news', ipadx=100, ipady=50)
+back_button.grid(row=1, column=1, sticky='news', ipadx=100, ipady=20)
 def open_scanner():
 	os.system('python scan_webcam.py')
 

@@ -1,0 +1,5 @@
+cikis: Yine bekleriz..!
+merhaba: Devri Âlem sistemine hoş geldiniz!
+giris: Giriş sistemine yönlendiriliyorsunuz!
+kullbilgi: Kullanıcı bilgileri getiriliyor...
+Kayıt olma sistemine yönlendiriliyorsunuz!

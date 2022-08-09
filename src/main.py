@@ -95,28 +95,28 @@ Yarışma: #TEKNOFEST2022""")
 # Creating widgets
 title_label = tkinter.Label(
     frame, text=f"Devrialem sistemine hoşgeldin!", bg='#333333', fg="#FF3399", font=("Consolas", 45))
-title_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=75)
+title_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=50)
 
 
 giris_button = tkinter.Button(
     frame, text="Giriş yap!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
-giris_button.grid(row=1,column=0, sticky="news", ipadx=75,ipady=75)
+giris_button.grid(row=1,column=0, sticky="news", ipadx=75,ipady=50)
 giris_button.config(command=login) #lambda: tlogin.start()
 
 kayit_button = tkinter.Button(
     frame, text="Kayıt ol!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
-kayit_button.grid(row=1,column=1, sticky="news", ipadx=75,ipady=75)
+kayit_button.grid(row=1,column=1, sticky="news", ipadx=75,ipady=50)
 kayit_button.config(command=signup) #lambda: tsignup.start()
 
 
 version_button= tkinter.Button(
     frame, text="Versiyon", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
-version_button.grid(row=2,column=0, sticky="news", ipadx=75,ipady=75)
+version_button.grid(row=2,column=0, sticky="news", ipadx=75,ipady=50)
 version_button.config(command=version)
 
 quit_button = tkinter.Button(
     frame, text="Çıkış!", bg="#FF3399", fg="#FFFFFF", font=("Consolas", 25))
-quit_button.grid(row=2,column=1, sticky="news",ipadx=75,ipady=75)
+quit_button.grid(row=2,column=1, sticky="news",ipadx=75,ipady=50)
 quit_button.config(command=on_closing)
 
 frame.pack()
