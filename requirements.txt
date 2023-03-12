@@ -15,7 +15,7 @@ opencv-contrib-python==4.6.0.66
 opencv-python==4.6.0.66
 packaging==21.3
 pefile==2022.5.30
-Pillow==9.1.1
+Pillow==9.3.0
 protobuf==3.20.1
 PyAutoGUI==0.9.53
 PyGetWindow==0.0.9
